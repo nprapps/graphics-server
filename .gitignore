@@ -1,3 +1,4 @@
-graphics/*
+graphics/**/*
+!graphics/.placeholder
 npm-debug.log
 node_modules

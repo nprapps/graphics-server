@@ -8,8 +8,6 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const context = require('./context');
 const config = require('./config');
 
-console.log(config);
-
 let activeMiddleware = null;
 let activeSlug = null;
 
