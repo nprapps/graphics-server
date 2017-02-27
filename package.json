@@ -1,13 +1,9 @@
 {
-  "name": "npr-line-chart-template",
+  "name": "npr-graphics-server",
   "version": "1.0.0",
-  "description": "NPR Visuals Graphic",
+  "description": "NPR Visuals Graphics Server",
   "scripts": {
-    "build": "curl http://127.0.0.1:8000/render/",
-    "deploy_stage": "npm build && node bin/deploy.js --target staging",
     "start": "nodemon --ignore node_modules/ --ignore graphics/ ./server.js",
-    "text": "node bin/text.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "d3",
