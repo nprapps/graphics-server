@@ -1,0 +1,40 @@
+{
+  "name": "npr-line-chart-template",
+  "version": "1.0.0",
+  "description": "NPR Visuals Graphic",
+  "scripts": {
+    "build": "curl http://127.0.0.1:8000/render/",
+    "deploy_stage": "npm build && node bin/deploy.js --target staging",
+    "start": "nodemon --ignore node_modules/ --ignore graphics/ ./server.js",
+    "text": "node bin/text.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "d3",
+    "dataviz",
+    "graphic"
+  ],
+  "author": "NPR Visuals",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "concurrently": "^2.2.0",
+    "css-loader": "^0.24.0",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "minimist": "^1.2.0",
+    "nodemon": "^1.10.2",
+    "nunjucks": "^2.4.2",
+    "style-loader": "^0.13.1",
+    "uglify-js": "^2.7.5",
+    "webpack": "^1.13.2",
+    "webpack-dashboard": "^0.1.8",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.2",
+    "xlsx": "^0.8.0"
+  }
+}
