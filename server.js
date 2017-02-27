@@ -8,6 +8,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const context = require('./context');
 const config = require('./config');
 
+console.log(config);
+
 let activeMiddleware = null;
 let activeSlug = null;
 
@@ -48,10 +50,10 @@ app.get('/graphics/:slug/child.html', function(req, res) {
 });
 
 const setupWebpackServer = function(graphicsPath) {
-  const config = require(`./${graphicsPath}/${config.WEBPACK_CONFIG_FILENAME}`)
-  const compiler = webpack(config);
+  const webpackConfig = require(`./${graphicsPath}/${config.WEBPACK_CONFIG_FILENAME}`)
+  const compiler = webpack(webpackConfig);
   activeMiddleware = webpackMiddleware(compiler, {
-    publicPath: config.output.publicPath,
+    publicPath: webpackConfig.output.publicPath,
     stats: {
       colors: true,
     },
