@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const context = require('./context');
+const config = require('./config');
 
 let activeMiddleware = null;
 let activeSlug = null;
@@ -21,13 +22,13 @@ nunjucks.configure('./', {
 
 // routes
 app.get('/graphics/:slug/', function(req, res) {
-  const graphicsPath = `graphics/${req.params.slug}`;
+  const graphicsPath = `${config.GRAPHICS_FOLDER}/${req.params.slug}`;
   const templateContext = context.makeContext(req.params.slug, 'localhost');
   res.render(`${graphicsPath}/parent_template.html`, templateContext);
 });
 
 app.get('/graphics/:slug/child.html', function(req, res) {
-  const graphicsPath = `graphics/${req.params.slug}`;
+  const graphicsPath = `${config.GRAPHICS_FOLDER}/${req.params.slug}`;
 
   const templateContext = context.makeContext(req.params.slug, 'localhost');
 
@@ -47,7 +48,7 @@ app.get('/graphics/:slug/child.html', function(req, res) {
 });
 
 const setupWebpackServer = function(graphicsPath) {
-  const config = require(`./${graphicsPath}/webpack.config.js`)
+  const config = require(`./${graphicsPath}/${config.WEBPACK_CONFIG_FILENAME}`)
   const compiler = webpack(config);
   activeMiddleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
@@ -58,35 +59,6 @@ const setupWebpackServer = function(graphicsPath) {
   app.use(activeMiddleware);
   app.use(webpackHotMiddleware(compiler));  
 };
-
-app.get('/render/', function(req, res) {
-  const data = context.makeContext('staging');
-  const prodCompiler = webpack(prodConfig);
-  app.use(middleware)
-
-  prodCompiler.run(function(err, stats) {
-    if (err) {
-      console.error(`webpack failed: ${err}`);
-      return;
-    }
-
-    app.render('parent_template.html', data, function(err, html) {
-      if (err) {
-        console.error(`parent_template.html failed: ${err}`);
-        return;
-      }
-      fs.writeFile('./dist/index.html', html);
-    }) 
-    app.render('child_template.html', data, function(err, html) {
-      if (err) {
-        console.error(`child_template.html failed: ${err}`);
-        return;
-      }
-      fs.writeFile('./dist/child.html', html);
-    })
-    res.status(201).send('Rendered graphic!');
-  })
-}); 
 
 app.listen('8000', function() {
   console.log('app started on port 8000');
