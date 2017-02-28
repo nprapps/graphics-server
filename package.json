@@ -4,7 +4,8 @@
   "description": "NPR Visuals Graphics Server",
   "scripts": {
     "start": "nodemon --ignore node_modules/ --ignore graphics/ ./server.js",
-    "new": "yo dailygraphic"
+    "new": "yo dailygraphic",
+    "preinstall": "npm install -g yo gh && brew install gdrive yarn; gdrive list"
   },
   "keywords": [
     "d3",
