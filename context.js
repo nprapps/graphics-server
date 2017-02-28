@@ -30,7 +30,6 @@ var makeCopyData = function(path) {
 }
 
 var makeContext = function(slug, target) {
-    console.log(slug)
     var graphicConfig = require(`./graphics/${slug}/graphic_config.js`).configureTargets(target);
 
     context = {

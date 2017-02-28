@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "NPR Visuals Graphics Server",
   "scripts": {
-    "start": "nodemon --ignore node_modules/ --ignore graphics/ ./server.js"
+    "start": "nodemon --ignore node_modules/ --ignore graphics/ ./server.js",
+    "new": "yo dailygraphic"
   },
   "keywords": [
     "d3",

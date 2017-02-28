@@ -33,8 +33,10 @@ app.get('/graphics/:slug/child.html', function(req, res) {
   const templateContext = context.makeContext(req.params.slug, 'localhost');
 
   if (activeMiddleware && activeSlug !== req.params.slug) {
+    // remove the current middlewares
     activeMiddleware.close();
     app._router.stack.pop();
+
     setupWebpackServer(graphicsPath);
   } else if (!activeMiddleware) {
     setupWebpackServer(graphicsPath);
@@ -52,9 +54,7 @@ const setupWebpackServer = function(graphicsPath) {
   const compiler = webpack(webpackConfig);
   activeMiddleware = webpackMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
-    stats: {
-      colors: true,
-    },
+    noInfo: true
   });
   app.use(activeMiddleware);
   app.use(webpackHotMiddleware(compiler));  
